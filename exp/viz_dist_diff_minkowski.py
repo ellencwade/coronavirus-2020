@@ -57,7 +57,7 @@ for region, dist in dist_diff.items():
         cases, labels = data.get_cases_chronologically(df)
         cases = cases.sum(axis=0)
 
-        lines = ax.plot(cases, label=labels[0,1])
+        lines = ax.plot(cases, label=val)
 
     ax.set_ylabel('# of confirmed cases')
     ax.set_xlabel("Time (days since Jan 22, 2020)")

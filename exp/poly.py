@@ -30,7 +30,7 @@ for val in np.unique(confirmed["Country/Region"]):
     cases, labels = data.get_cases_chronologically(df)
     cases = cases.sum(axis=0)
 
-    lines = ax.plot(cases, label=labels[0,1])
+    lines = ax.plot(cases, label=val)
     lines[0].set_linestyle('solid')
     lines[0].set_color('blue')
 
