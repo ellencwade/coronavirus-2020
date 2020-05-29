@@ -63,7 +63,7 @@ for val in np.unique(confirmed["Country/Region"]):
     plt.tight_layout()
     plt.title('Predicted total # of cases')
     val = val.replace('*', '')
-    plt.savefig('results/polynomial_predictions_{0}/{0}.png'.format(degrees, val))
+    plt.savefig('results/polynomial_predictions_{0}/{1}.png'.format(degrees, val))
     plt.close()
 
     print(val)
