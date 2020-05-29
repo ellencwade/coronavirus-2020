@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 
 # ------------ HYPERPARAMETERS -------------
 BASE_PATH = '../COVID-19/csse_covid_19_data/'
+# degrees variable sets number of degrees of the polynomial
+degrees = 4
 # ------------------------------------------
 
 confirmed = os.path.join(
@@ -40,12 +42,14 @@ for val in np.unique(confirmed["Country/Region"]):
     new_cases = new_cases[new_cases > 0]
 
     x = np.linspace(start_day, len(cases)-1, total_days-start_day)
-    poly = np.polyfit(x, new_cases.astype(float), 7)
+    poly = np.polyfit(x, new_cases.astype(float), degrees)
     p = np.poly1d(poly)
-    x2 = np.linspace(start_day, total_days + 9, total_days+10-start_day)
+    x2 = np.linspace(start_day, total_days + 30, total_days+30-start_day+1)
     predictions = p(x2)
     zeros = np.zeros(start_day)
     predictions = np.concatenate([zeros, predictions])
+    print(x2[x2.size - 1])
+    print(predictions[predictions.size - 1])
 
     lines = ax.plot(predictions, label='Predicted')
     lines[0].set_linestyle('dotted')
@@ -59,7 +63,7 @@ for val in np.unique(confirmed["Country/Region"]):
     plt.tight_layout()
     plt.title('Predicted total # of cases')
     val = val.replace('*', '')
-    plt.savefig('results/polynomial_predictions/{0}.png'.format(val))
+    plt.savefig('results/polynomial_predictions_{0}/{0}.png'.format(degrees, val))
     plt.close()
 
     print(val)
